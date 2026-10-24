@@ -1,0 +1,110 @@
+:root {
+  --ink: #1f2937;
+  --navy: #1e3a5f;
+  --navy-dark: #152b47;
+  --slate: #eef0f3;
+}
+
+body {
+  background: var(--slate);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Navbar: flexbox + sticky positioning */
+.app-navbar {
+  background: #111827;
+  border-bottom: 3px solid var(--navy);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+/* Bootstrap primary colour overridden with navy */
+.btn-primary {
+  --bs-btn-bg: var(--navy);
+  --bs-btn-border-color: var(--navy);
+  --bs-btn-hover-bg: var(--navy-dark);
+  --bs-btn-hover-border-color: var(--navy-dark);
+  --bs-btn-active-bg: var(--navy-dark);
+  --bs-btn-active-border-color: var(--navy-dark);
+  --bs-btn-focus-shadow-rgb: 30, 58, 95;
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--navy);
+  --bs-btn-border-color: var(--navy);
+  --bs-btn-hover-bg: var(--navy);
+  --bs-btn-hover-border-color: var(--navy);
+  --bs-btn-active-bg: var(--navy);
+  --bs-btn-active-border-color: var(--navy);
+  --bs-btn-focus-shadow-rgb: 30, 58, 95;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 0.2rem rgba(30, 58, 95, 0.2);
+}
+
+/* Summary cards */
+.stat-card {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.1);
+  border-left: 5px solid var(--navy);
+}
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4b5563;
+}
+.stat-value { font-size: 2rem; font-weight: 700; line-height: 1.1; }
+.stat-open     { border-left-color: #2b7a99; }
+.stat-progress { border-left-color: #b7791f; }
+.stat-closed   { border-left-color: #2f7d4f; }
+
+/* CSS Grid layout: stacked on mobile, two columns on desktop */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 360px 1fr;
+    align-items: start;
+  }
+  /* sticky keeps the form in view while the list scrolls */
+  .form-panel {
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+.card { border-radius: 0.5rem; }
+.card-header { background: #fff; }
+
+/* Table */
+.table thead th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4b5563;
+  white-space: nowrap;
+}
+.issue-cell { max-width: 280px; }
+
+.badge-priority-High   { background: #fde2e2; color: #9b1c1c; }
+.badge-priority-Medium { background: #fdf0d0; color: #8a5a0b; }
+.badge-priority-Low    { background: #dff3e6; color: #1e6b3d; }
+.badge-status-Open        { background: #dbeaf3; color: #1d5a78; }
+.badge-status-In-Progress { background: #fdf0d0; color: #8a5a0b; }
+.badge-status-Closed      { background: #dff3e6; color: #1e6b3d; }
+
+mark { padding: 0 0.1em; background: #fde68a; }
+
+@media (max-width: 575.98px) {
+  .stat-value { font-size: 1.6rem; }
+  .issue-cell { max-width: 160px; }
+}

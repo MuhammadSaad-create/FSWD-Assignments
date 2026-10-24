@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Support Dashboard</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top navigation -->
+  <nav class="navbar navbar-dark app-navbar sticky-top">
+    <div class="container-fluid px-3 px-lg-4">
+      <span class="navbar-brand mb-0 h1">
+        SupportDesk
+      </span>
+      <span class="text-white-50 small d-none d-sm-inline">Customer Support Ticket Dashboard</span>
+    </div>
+  </nav>
+
+  <main class="container-fluid px-3 px-lg-4 py-4">
+
+    <!-- Ticket summary (Part B) -->
+    <section class="row g-3 mb-4" aria-label="Ticket summary">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card stat-total">
+          <div class="stat-label">Total</div>
+          <div class="stat-value" id="count-total">0</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card stat-open">
+          <div class="stat-label">Open</div>
+          <div class="stat-value" id="count-open">0</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card stat-progress">
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="count-progress">0</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card stat-closed">
+          <div class="stat-label">Closed</div>
+          <div class="stat-value" id="count-closed">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS Grid: form column + tickets column on desktop, stacked on mobile -->
+    <div class="dashboard-grid">
+
+      <!-- Ticket form (Part A) -->
+      <section class="card shadow-sm form-panel">
+        <div class="card-header fw-semibold" id="form-title">
+          New Ticket
+        </div>
+        <div class="card-body">
+          <form id="ticket-form" novalidate>
+            <input type="hidden" id="ticket-id">
+
+            <div class="mb-3">
+              <label for="customer" class="form-label">Customer name</label>
+              <input type="text" class="form-control" id="customer" placeholder="e.g. Ayesha Khan">
+              <div class="invalid-feedback" id="customer-error"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="issue" class="form-label">Issue</label>
+              <textarea class="form-control" id="issue" rows="3" placeholder="Describe the problem"></textarea>
+              <div class="invalid-feedback" id="issue-error"></div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <label for="priority" class="form-label">Priority</label>
+                <select class="form-select" id="priority">
+                  <option value="">Select…</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+                <div class="invalid-feedback" id="priority-error"></div>
+              </div>
+              <div class="col-6">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status">
+                  <option value="Open">Open</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Closed">Closed</option>
+                </select>
+                <div class="invalid-feedback" id="status-error"></div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary flex-grow-1" id="submit-btn">
+                <span id="submit-label">Add Ticket</span>
+              </button>
+              <button type="button" class="btn btn-outline-secondary" id="reset-btn">
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Ticket list with search and filter -->
+      <section class="card shadow-sm list-panel">
+        <div class="card-header fw-semibold">
+          Tickets
+          <span class="badge text-bg-secondary ms-1" id="visible-count">0</span>
+        </div>
+        <div class="card-body">
+
+          <div class="row g-2 mb-3">
+            <div class="col-12 col-md-6">
+              <div class="input-group">
+                <span class="input-group-text">Search</span>
+                <input type="search" class="form-control" id="search" placeholder="Search issue keyword…">
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <select class="form-select" id="filter-status" aria-label="Filter by status">
+                <option value="">All statuses</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-3">
+              <select class="form-select" id="filter-priority" aria-label="Filter by priority">
+                <option value="">All priorities</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Customer</th>
+                  <th>Issue</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ticket-body"></tbody>
+            </table>
+          </div>
+          <p class="text-center text-muted my-4 d-none" id="empty-state">
+            No tickets match your search.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
